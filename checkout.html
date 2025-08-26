@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout — Mehendi by Saba</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header thin">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">Mehendi <span>by Saba</span></a>
+      <div class="actions">
+        <a class="btn ghost" href="index.html#products">আরও কেনাকাটা</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="section container checkout-wrap">
+    <!-- Order Summary -->
+    <section class="card order-summary">
+      <h3>অর্ডার সামারি</h3>
+      <ul id="summaryList" class="summary-list"></ul>
+      <div class="row mt">
+        <span>সাবটোটাল</span><strong>৳<span id="sumSubtotal">0</span></strong>
+      </div>
+      <div class="row">
+        <span>ডেলিভারি</span>
+        <select id="shipping" class="field">
+          <option value="80">রংপুরের ভিতরে — ৳60</option>
+          <option value="130">রংপুরের বাইরে — ৳130</option>
+        </select>
+      </div>
+      <div class="row coupon-row">
+        <input id="coupon" class="field" type="text" placeholder="কুপন কোড (যদি থাকে)">
+        <button id="applyCoupon" class="btn small">Apply</button>
+      </div>
+      <div class="row total-row">
+        <span>মোট</span><strong>৳<span id="grandTotal">0</span></strong>
+      </div>
+    </section>
+
+    
+    <!-- Customer Info -->
+    <section class="card">
+      <h3>কাস্টমার তথ্য</h3>
+      <div class="grid2">
+        <input id="c_name" class="field" placeholder="পুরো নাম" required>
+        <input id="c_phone" class="field" placeholder="মোবাইল নম্বর (০১XXXXXXXXX)" required>
+      </div>
+      <div class="grid2">
+        <input id="c_email" class="field" placeholder="ইমেইল (ঐচ্ছিক)" value="mehendibysaba02@gmail.com">
+        <input id="c_city" class="field" placeholder="শহর/জেলা">
+      </div>
+      <input id="c_address" class="field" placeholder="সম্পূর্ণ ঠিকানা" required>
+      <textarea id="c_note" class="field" rows="3" placeholder="নোট (যদি থাকে)"></textarea>
+    </section>
+<!-- Payment Box -->
+    <section class="card payment-box">
+      <h3>পেমেন্ট মেথড</h3>
+      <div class="pay-tabs">
+        <button class="pay-tab active" data-method="bkash">
+          <img src="assets/bkash.svg" alt="bKash"> bKash
+        </button>
+        <button class="pay-tab" data-method="nagad">
+          <img src="assets/nagad.svg" alt="Nagad"> Nagad
+        </button>
+      </div>
+
+      <div id="payContent" class="pay-content">
+        <!-- dynamic content injected by JS -->
+      </div>
+
+      <!--<div class="notice">
+        <p><strong>নোট:</strong> এটি ডেমো পেমেন্ট। বাস্তব ইন্টিগ্রেশনের জন্য bKash/Nagad গেটওয়ের Merchant API ব্যবহার করুন।</p>
+      </div>-->
+
+      <button id="placeOrder" class="btn wide">Place Order</button>
+    </section>
+  </main>
+
+  <footer class="section container" style="opacity:.9">
+    <hr style="border-color:rgba(255,255,255,.1)">
+    <p style="margin-top:12px">Project: <strong>Mehendi by Saba</strong> • Mobile: <a href="tel:+8801797850441">01797850441</a> • Email: <a href="mailto:mehendibysaba02@gmail.com">mehendibysaba02@gmail.com</a></p>
+  </footer>
+
+
+  <!-- Success Modal -->
+  <div id="successModal" class="modal">
+    <div class="modal-inner">
+      <h3>অর্ডার সফল হয়েছে 🎉</h3>
+      <p>অর্ডার নম্বর: <strong id="orderId"></strong></p>
+      <p>আমরা SMS/Email এ কনফার্মেশন পাঠাবো।</p>
+      <a class="btn wide" href="index.html">হোমে ফিরে যান</a>
+    </div>
+  </div>
+
+  <div id="overlay" class="overlay"></div>
+
+  <script src="app.js"></script>
+
+  <!-- Floating Chat Buttons -->
+  <div class="floating-chat">
+    <a class="chat-btn wa" href="https://wa.me/8801797850441" target="_blank" aria-label="WhatsApp">WA</a>
+    <a class="chat-btn ms" href="https://www.facebook.com/profile.php?id=100092610762131" target="_blank" aria-label="Messenger">MS</a>
+  </div>
+  <style>
+    .floating-chat{position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:10px;z-index:1000}
+    .chat-btn{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:var(--brand);color:white;text-decoration:none;font-weight:700;box-shadow:0 10px 20px rgba(0,0,0,.25)}
+    .chat-btn.wa{background:#25D366}
+    .chat-btn.ms{background:#0084FF}
+  </style>
+
+  <script src="gsheets.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

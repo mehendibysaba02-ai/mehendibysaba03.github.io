@@ -1,0 +1,28 @@
+
+// nagad.js
+const express = require("express");
+const router = express.Router();
+
+// Sandbox Config (replace with real credentials in production)
+const NAGAD_MERCHANT_ID = "your-merchant-id";
+const NAGAD_MERCHANT_NUMBER = "your-merchant-number";
+
+router.post("/create", (req, res) => {
+  const { amount, invoice } = req.body;
+  res.json({
+    success: true,
+    message: "Nagad payment created (Sandbox)",
+    paymentURL: `https://sandbox.nagad.com/payment/${invoice}`,
+  });
+});
+
+router.post("/complete", (req, res) => {
+  const { paymentRef } = req.body;
+  res.json({
+    success: true,
+    message: "Nagad payment completed (Sandbox)",
+    paymentRef,
+  });
+});
+
+module.exports = router;

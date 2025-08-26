@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Form</title>
+</head>
+<body>
+  <h2>অর্ডার কনফার্ম</h2>
+  <form id="orderForm">
+    <label>মোবাইল নাম্বার:</label><br>
+    <input type="text" name="mobile" placeholder="01XXXXXXXXX" required><br><br>
+
+    <label>ট্রানজেকশন আইডি:</label><br>
+    <input type="text" name="trxid" placeholder="Bkash/Nagad TXN ID" required><br><br>
+
+    <button type="submit">অর্ডার সাবমিট</button>
+  </form>
+
+  <p id="status"></p>
+
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("YOUR_PUBLIC_KEY"); // এখানে Public Key বসান
+    })();
+
+    document.getElementById("orderForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      document.getElementById("status").innerText = "পাঠানো হচ্ছে...";
+
+      emailjs.init("YOUR_PUBLIC_KEY");  // এখানে Public Key
+emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+    mobile: this.mobile.value,
+    trxid: this.trxid.value
+})
+
+      .then(function(response) {
+        document.getElementById("status").innerText = "অর্ডার পাঠানো হয়েছে! আমরা কনফার্ম করব।";
+      }, function(error) {
+        document.getElementById("status").innerText = "সমস্যা হয়েছে, আবার চেষ্টা করুন।";
+      });
+    });
+  </script>
+</body>
+</html>

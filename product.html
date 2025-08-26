@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Details — Mehendi by Saba</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header thin">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">Mehendi <span>by Saba</span></a>
+      <div class="actions">
+        <a class="btn ghost" href="index.html#products">প্রোডাক্টস</a>
+        <a class="btn" href="checkout.html">Checkout</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="section container">
+    <section class="card" id="pwrap">
+      <div class="grid2">
+        <img id="pimg" class="product-img-lg" src="" alt="">
+        <div>
+          <h2 id="pname"></h2>
+          <p class="price">৳<span id="pprice"></span></p>
+          <div class="row">
+            <label>পরিমাণ</label>
+            <input id="pqty" type="number" class="field" value="1" min="1">
+          </div>
+          <button id="addToCart" class="btn large">কার্টে যোগ করুন</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="section container" style="opacity:.9">
+    <hr style="border-color:rgba(255,255,255,.1)">
+    <p style="margin-top:12px">Project: <strong>Mehendi by Saba</strong> • Mobile: <a href="tel:+8801797850441">01797850441</a> • Email: <a href="mailto:mehendibysaba02@gmail.com">mehendibysaba02@gmail.com</a></p>
+  </footer>
+
+
+  <div id="overlay" class="overlay"></div>
+  <script src="app.js"></script>
+  <script>
+    // Render product by id from query
+    function getParam(n){ return new URLSearchParams(location.search).get(n); }
+    const id = parseInt(getParam('id')||'0',10);
+    const prod = (window.PRODUCTS || PRODUCTS || []).find(p=>p.id===id) || (window.PRODUCTS||PRODUCTS||[])[0];
+    document.getElementById('pimg').src = prod.img;
+    document.getElementById('pimg').alt = prod.name;
+    document.getElementById('pname').textContent = prod.name;
+    document.getElementById('pprice').textContent = prod.price.toLocaleString('bn-BD');
+    document.getElementById('addToCart').onclick = ()=>{
+      const qty = Math.max(1, parseInt(document.getElementById('pqty').value||'1',10));
+      const cart = JSON.parse(localStorage.getItem('yz_cart_v1')||'[]');
+      const i = cart.findIndex(x=>x.id===prod.id);
+      if(i>-1){ cart[i].qty += qty; } else { cart.push({id:prod.id,qty}); }
+      localStorage.setItem('yz_cart_v1', JSON.stringify(cart));
+      alert('কার্টে যোগ হয়েছে');
+      location.href = 'checkout.html';
+    };
+  </script>
+</body>
+</html>

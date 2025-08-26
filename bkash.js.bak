@@ -1,0 +1,31 @@
+
+// bkash.js
+const express = require("express");
+const router = express.Router();
+
+// Sandbox Config (replace with real credentials in production)
+const BKASH_APP_KEY = "your-app-key";
+const BKASH_APP_SECRET = "your-app-secret";
+const BKASH_USERNAME = "your-username";
+const BKASH_PASSWORD = "your-password";
+
+router.post("/create", (req, res) => {
+  // Mock Sandbox Flow
+  const { amount, invoice } = req.body;
+  res.json({
+    success: true,
+    message: "bKash payment created (Sandbox)",
+    paymentURL: `https://sandbox.bkash.com/payment/${invoice}`,
+  });
+});
+
+router.post("/execute", (req, res) => {
+  const { paymentID } = req.body;
+  res.json({
+    success: true,
+    message: "bKash payment executed (Sandbox)",
+    paymentID,
+  });
+});
+
+module.exports = router;
